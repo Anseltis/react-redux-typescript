@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "removeComments": false,
+        "noImplicitAny": false,
+        "lib": [
+            "es2016",
+            "dom"
+        ],
+        "jsx": "react"
+    },
+    "include": [
+        "src/**/*",
+        "test/**/*"
+    ],
+    "awesomeTypescriptLoaderOptions": {
+        "useBabel": true,
+        "useCache": false,
+        "emitRequireType": false,
+        "babelOptions": {
+            "presets": ["es2015", "react"]
+        }
+    },
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}
