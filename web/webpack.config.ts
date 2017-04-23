@@ -10,7 +10,7 @@ export default <webpack.Configuration>{
     ],
     devServer: {
         publicPath: '/',
-        contentBase: 'D:/Work/GulpTest/web',
+        contentBase: __dirname,
         hot: true,
         historyApiFallback: true,
         inline: true,
