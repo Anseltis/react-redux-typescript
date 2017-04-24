@@ -1,0 +1,14 @@
+@import "~bootstrap-sass/assets/stylesheets/_bootstrap-sprockets.scss";
+@import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+
+.todo-item {
+  @extend .list-group-item;
+
+  text-decoration: none;
+  margin: 5px;
+
+  &#{&}_completed {
+    text-decoration: line-through;
+  }
+}
+

@@ -1,0 +1,6 @@
+@import "~bootstrap-sass/assets/stylesheets/_bootstrap-sprockets.scss";
+@import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+
+.todo-list {
+  @extend .list-group;
+}

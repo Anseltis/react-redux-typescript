@@ -1,5 +1,8 @@
 import * as webpack from 'webpack';
 import * as path from 'path';
+import * as StyleLintPlugin from 'stylelint-webpack-plugin';
+import * as FixDefaultImportPlugin from 'webpack-fix-default-import-plugin';
+import { TsConfigPathsPlugin, CheckerPlugin } from 'awesome-typescript-loader';
 
 export default <webpack.Configuration>{
     devtool: 'source-map',
@@ -34,9 +37,25 @@ export default <webpack.Configuration>{
             test: /\.tsx?$/,
             loader: 'awesome-typescript-loader',
             exclude: /node_modules/
+        }, {
+            test: /\.scss$/,
+            loader: 'style-loader!css-loader!sass-loader'
+        }, {
+            test: /(node_modules).+\.css$/,
+            loader: 'style-loader!css-loader'
         }]
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
+        new CheckerPlugin(),
+        new TsConfigPathsPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
+        new StyleLintPlugin({
+            syntax: 'scss',
+            context: __dirname
+        }),
+        new FixDefaultImportPlugin(),
+        new webpack.ProvidePlugin({
+           jQuery: 'jquery'
+        })
     ]
 };

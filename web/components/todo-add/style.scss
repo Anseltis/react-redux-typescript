@@ -1,0 +1,23 @@
+@import "~bootstrap-sass/assets/stylesheets/_bootstrap-sprockets.scss";
+@import "~bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+
+.todo-add {
+  &__form {
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  &__add-button {
+    @extend .btn;
+    @extend .btn-primary;
+
+    margin: 5px;
+  }
+
+  &__text-input {
+    @extend .form-control;
+
+    margin: 5px;
+  }
+}
+

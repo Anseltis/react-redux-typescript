@@ -6,15 +6,15 @@ import { Provider } from 'react-redux';
 import { StoreType } from './store/store';
 import { configureStore } from './configureStore';
 
-import { TodoList } from './components/todoList';
-import { AddTodo } from './components/addTodo';
+import { TodoList } from './components/todo-list';
+import { TodoAdd } from './components/todo-add';
 
 const store: Store<StoreType> = configureStore();
 
 ReactDOM.render(
     <Provider store={ store }>
         <div>
-            <AddTodo />
+            <TodoAdd />
             <TodoList />
         </div>
     </Provider>,

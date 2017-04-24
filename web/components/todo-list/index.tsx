@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { Map } from 'immutable';
 
-import { TodoListStore, TodoListState } from '../store/todoList';
-import { getVisibleTodoList } from '../selectors/todoSelector';
-import { toggleTodo } from '../actions/todoActions';
-import { Todo, TodoPropTypes } from './todo';
+import { TodoListStore, TodoListState } from '../../store/todoList';
+import { getVisibleTodoList } from '../../selectors/todoSelector';
+import { toggleTodo } from '../../actions/todoActions';
+import { Todo, TodoPropTypes } from '../todo';
+
+import './style.scss';
 
 export interface TodoListProps extends React.Props<any> {
   todoList?: TodoListState;
@@ -37,7 +39,8 @@ export class TodoList extends React.Component<TodoListProps, TodoListStore> {
   }
 
   render(): JSX.Element | null {
-    return <ul>{ this.props.todoList.map(todo => <Todo
+    return <ul className='todo-list'>
+      { this.props.todoList.map(todo => <Todo
       key={todo.id}
       onClick={() => this.props.onTodoClick(todo.id)}
       {...todo} />)}</ul>;
