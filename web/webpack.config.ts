@@ -53,9 +53,6 @@ export default <webpack.Configuration>{
             syntax: 'scss',
             context: __dirname
         }),
-        new FixDefaultImportPlugin(),
-        new webpack.ProvidePlugin({
-           jQuery: 'jquery'
-        })
+        new FixDefaultImportPlugin()
     ]
 };
