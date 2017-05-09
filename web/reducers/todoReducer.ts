@@ -4,6 +4,9 @@ import { TodoListStore } from '../store/todoList';
 import { TodoStore } from '../store/todo';
 import { Map, List, fromJS } from 'immutable';
 
+import { initialTodoStore } from '../store/initial';
+import { StoreType } from '../store/store';
+
 export interface TodoReducer {
   (state: TodoStore, action: any): TodoStore;
 }
@@ -30,7 +33,7 @@ const todoReducer: TodoReducer = (state, action) => {
   }
 };
 
-export const todoListReducer: TodoListReducer = (state, action) => {
+export const todoListReducer: TodoListReducer = (state = initialTodoStore, action) => {
   switch (action.type) {
     case ActionName.ADD_TODO:
       return state.push(todoReducer(undefined, action));
@@ -42,4 +45,3 @@ export const todoListReducer: TodoListReducer = (state, action) => {
       return state;
   }
 };
-

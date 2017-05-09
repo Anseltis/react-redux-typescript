@@ -2,12 +2,21 @@
   "name": "redux-example",
   "version": "0.0.1",
   "description": "Example redux test",
-  "scripts": {},
+  "scripts": {
+    "start": "gulp start",
+    "build": "gulp build"
+  },
   "author": "Anseltis",
   "license": "MIT",
   "devDependencies": {
     "@types/gulp": "^4.0.2",
+    "@types/react": "^15.0.23",
+    "@types/react-dom": "^15.5.0",
+    "@types/react-redux": "^4.4.40",
+    "@types/redux-form": "^6.6.2",
+    "@types/reselect": "^2.2.0",
     "@types/webpack": "^2.2.15",
+    "@types/webpack-dev-server": "^1.12.6",
     "awesome-typescript-loader": "^3.1.2",
     "babel-core": "^6.24.1",
     "babel-loader": "^6.4.1",
@@ -17,6 +26,7 @@
     "bootstrap-sass": "^3.3.7",
     "css-loader": "^0.28.0",
     "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
     "gulp": "^3.9.1",
     "gulp-typescript": "^3.1.6",
     "gulp-util": "^3.0.8",
@@ -29,19 +39,21 @@
     "ts-node": "^3.0.2",
     "tslint": "^4.0.2",
     "tslint-loader": "^3.2.0",
-    "typescript": "~2.2.1",
+    "typescript": "^2.3.2",
     "webpack": "^2.3.3",
     "webpack-dev-server": "^2.4.2",
     "webpack-fix-default-import-plugin": "^1.0.1"
   },
-  "dependencies": {    
+  "dependencies": {
     "bootstrap.native": "^2.0.10",
     "immutable": "^3.8.1",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
+    "react-bem-helper": "^1.4.1",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
+    "redux-form": "^6.6.3",
     "redux-saga": "^0.14.7",
     "reselect": "^3.0.0"
   }

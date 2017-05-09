@@ -15,7 +15,7 @@ export function* watchAndLog(): SagaIterator {
 
 function* addIfLast(): SagaIterator {
     const state: StoreType = yield effects.select();
-    if (state.filter(todo => !todo.get('completed')).count() === 0) {
+    if (state.todo.filter(todo => !todo.get('completed')).count() === 0) {
         yield effects.put(addTodo('add new todo for example'));
     }
   }

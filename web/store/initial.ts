@@ -1,11 +1,11 @@
 import { Map, List, fromJS } from 'immutable';
 
 import { TodoState } from './todo';
-import { TodoListState } from './todoList';
+import { TodoListState, TodoListStore } from './todoList';
 import { StateType, StoreType } from './store';
 
 export const lastTodoId: number = 1;
-export const initialState: StateType = [
+export const initialTodoState: TodoListState = [
     <TodoState>{
         id: '1',
         text: 'test',
@@ -13,4 +13,4 @@ export const initialState: StateType = [
     }
 ];
 
-export const initialStore: StoreType = fromJS(initialState);
+export const initialTodoStore: TodoListStore = fromJS(initialTodoState);

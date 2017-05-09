@@ -1,5 +1,10 @@
 import { TodoListState, TodoListStore } from './todoList';
-import { List } from 'immutable';
+import { Map } from 'immutable';
 
-export type StateType  = TodoListState;
-export type StoreType  = TodoListStore;
+export class StateType {
+    todo: TodoListState;
+}
+
+export type StoreType =  {
+    todo: TodoListStore;
+}

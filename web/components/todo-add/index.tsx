@@ -1,51 +1,29 @@
 import * as React from 'react';
-import { PropTypes, Validator } from 'prop-types';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
-import { Map } from 'immutable';
+import { Field } from 'redux-form';
+import { HelperFunction } from 'react-bem-helper';
 
-import * as Action from '../../actions/todoActions';
+import { TodoAddProps, TodoAddPropTypes } from '../../props/todoAdd';
+import { TodoAddText } from '../todo-add-text';
+import { bem } from '../../../tools/bem';
 
 import './style.scss';
 
-export interface TodoAddProps extends React.Props<any> {
-    addTodo?: (text: string) => void;
+const classes: HelperFunction<string> = bem('todo-add');
+
+export class TodoAdd extends React.Component<TodoAddProps, void> {
+    static propTypes?: any = TodoAddPropTypes;
+    constructor(props: TodoAddProps, context: any) {
+      super(props, context);
+    }
+
+    render(): JSX.Element | null {
+      return <div className={classes()}>
+        <form onSubmit={this.props.handleSubmit} className={classes('form')}> 
+          <Field name='text' component={TodoAddText}/>
+          <button type='submit' className={classes('add-button')} >
+            Add Todo
+          </button>
+        </form>
+      </div>;
+  }
 }
-
-export const TodoAddPropTypes : Map<string, Validator<any>> = Map<string, Validator<any>>();
-
-function mapStateToProps (state: any): TodoAddProps {
-  return {
-  };
-}
-function mapDispatchToProps(dispatch: Dispatch<any>): TodoAddProps {
-  return {
-      addTodo: (text) => dispatch(Action.addTodo(text))
-  };
-}
-
-const todoAdd: React.StatelessComponent<TodoAddProps>  = (props) => {
-    let input: any;
-    return <div className='todo-add'>
-      <form className='todo-add__form'
-        onSubmit={e => {
-          e.preventDefault();
-          if (!input.value.trim()) {
-            return;
-          }
-          props.addTodo(input.value);
-          input.value = '';
-        }}
-      >
-        <input ref= {node => { input = node; }} className='todo-add__text-input' />
-        <button type='submit' className='todo-add__add-button'>
-          Add Todo
-        </button>
-      </form>
-    </div>;
-};
-
-
-todoAdd.propTypes = TodoAddPropTypes .toJS();
-
-export const TodoAdd : React.StatelessComponent<TodoAddProps> = connect(mapStateToProps, mapDispatchToProps)(todoAdd);
