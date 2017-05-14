@@ -1,5 +1,5 @@
 import { TodoState, TodoStore } from './todo';
-import { List } from 'immutable';
+import { Iterable } from 'immutable';
 
 export type TodoListState  = TodoState[];
-export type TodoListStore  = List<TodoStore>;
+export type TodoListStore  = Iterable<TodoStore, TodoStore>;

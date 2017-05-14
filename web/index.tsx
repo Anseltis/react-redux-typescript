@@ -8,14 +8,15 @@ import { configureStore } from './configureStore';
 
 import { VisibleTodoList } from './containers/VisibleTodoList';
 import { FormTodoAdd } from './containers/FormTodoAdd';
+import { TodoLayout } from './components/todo-layout';
 
 const store: Store<StoreType> = configureStore();
 
 ReactDOM.render(
     <Provider store={ store }>
-        <div>
+        <TodoLayout>
             <FormTodoAdd />
             <VisibleTodoList />
-        </div>
+        </TodoLayout>
     </Provider>,
     document.getElementById('root'));

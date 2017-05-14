@@ -61,6 +61,7 @@ export class CommonConfigFactory implements ConfigFactory<Webpack.Configuration>
 
     protected module(): Webpack.Module {
         return {
+            exprContextCritical: false,
             rules: [{
                 test: /\.ts$/,
                 loader: 'tslint-loader?emitErrors=false&failOnHint=false',
@@ -87,7 +88,7 @@ export class CommonConfigFactory implements ConfigFactory<Webpack.Configuration>
         return [
             new CheckerPlugin(),
             new TsConfigPathsPlugin(),
-            new StyleLintPlugin({
+            StyleLintPlugin({
                 syntax: 'scss',
                 context: this.dirname
             }),

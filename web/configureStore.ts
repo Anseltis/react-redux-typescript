@@ -4,30 +4,25 @@ import { applyMiddleware, createStore, compose, combineReducers } from 'redux';
 import { default as sagaMiddlewareFactory, SagaMiddleware, SagaIterator, Effect, effects, takeEvery } from 'redux-saga';
 import { reducer as formReducer } from 'redux-form';
 
+import { createReducer } from '../tools/react/reducer';
+import { devtool } from '../tools/react/devtool';
+import { hotReplace } from '../tools/react/hotReplace';
+
 import { StoreType } from './store/store';
-import { todoListReducer } from './reducers/todoReducer';
-import { watchAndLog, watchLast } from './sagas/todoSaga';
+import { initialTodoStore } from './store/initial';
 
-function devtool(enhancer: GenericStoreEnhancer): StoreEnhancer<StoreType> {
-  if (typeof window === 'object' && (window as any).__REDUX_DEVTOOLS_EXTENSION__) {
-    let tool: any = (window as any).__REDUX_DEVTOOLS_EXTENSION__({
-      serialize: true
-    });
-    return compose(<StoreEnhancer<StoreType>>enhancer, tool);
-  }
+import { TodoListReducer } from './reducers/todoReducer';
+import { watchAndLog, watchSubmit } from './sagas/todoSaga';
 
-  return <StoreEnhancer<StoreType>>enhancer;
-}
-
- const rootReducer: Reducer<StoreType> = combineReducers<StoreType>({
+const rootReducer: Reducer<StoreType> = combineReducers<StoreType>({
    form: formReducer,
-   todo: todoListReducer
+   todo: createReducer(TodoListReducer, initialTodoStore)
   });
 
 function* rootSaga(): SagaIterator  {
   yield <Effect[]><any>[
     watchAndLog(),
-    watchLast()
+    watchSubmit()
   ];
 }
 
@@ -35,16 +30,10 @@ export function configureStore(): Store<StoreType> {
   const sagaMiddleware: SagaMiddleware = sagaMiddlewareFactory();
   const store: Store<StoreType> = createStore<StoreType>(
     rootReducer,
-    devtool(applyMiddleware(sagaMiddleware)));
+    devtool<StoreType>(applyMiddleware(sagaMiddleware)));
+
   sagaMiddleware.run(rootSaga);
 
-  if ((<any>module).hot) {
-    // Enable Webpack hot module replacement for reducers
-    (<any>module).hot.accept('./reducers/todoReducer', () => {
-      const nextReducer: any = require('./reducers/todoReducer').default; // eslint-disable-line global-require
-      store.replaceReducer(nextReducer);
-    });
-  }
-
+  hotReplace(store, './reducers/todoReducer');
   return store;
 }

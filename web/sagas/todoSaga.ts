@@ -1,25 +1,22 @@
 import { takeEvery, takeLatest, effects, Effect, SagaIterator } from 'redux-saga';
+import { Action } from 'redux';
+import { reset } from 'redux-form';
+
 import * as ActionName from '../actionNames';
 import { StoreType } from '../store/store';
-import { addTodo } from '../actions/todoActions';
+import { todoActions } from '../actions/todoActions';
+import { use } from '../../tools/react/action';
 
-function* logger(action: any): SagaIterator {
+export function* watchAndLog(): SagaIterator {
+  yield* takeEvery('*', function* (action: Action): SagaIterator {
     console.log('action', action);
     const state: any = yield effects.select();
     console.log('state after', state);
-  }
-
-export function* watchAndLog(): SagaIterator {
-  yield* takeEvery('*', logger);
+  });
 }
 
-function* addIfLast(): SagaIterator {
-    const state: StoreType = yield effects.select();
-    if (state.todo.filter(todo => !todo.get('completed')).count() === 0) {
-        yield effects.put(addTodo('add new todo for example'));
-    }
-  }
-
-export function* watchLast(): SagaIterator {
-  yield* takeLatest(ActionName.TOGGLE_TODO, addIfLast);
+export function* watchSubmit(): SagaIterator {
+  yield* takeEvery('@@redux-form/SET_SUBMIT_SUCCEEDED', function* (action: Action): SagaIterator {
+    yield effects.put(reset('todo-add'));
+  });
 }

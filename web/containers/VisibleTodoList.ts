@@ -5,10 +5,11 @@ import { Dispatch } from 'redux';
 import { TodoListState, TodoListStore } from '../store/todoList';
 import { StoreType } from '../store/store';
 import { getVisibleTodoList } from '../selectors/todoSelector';
-import { toggleTodo } from '../actions/todoActions';
+import { todoActions } from '../actions/todoActions';
 import { TodoListStateProps, TodoListDispatchProps, TodoListOwnProps, TodoListProps, TodoListPropTypes } from '../props/todoList';
 import { TodoOwnProps } from '../props/todo';
 import { TodoList } from '../components/todo-list';
+import { use } from '../../tools/react/action';
 
 const mapStateToProps: MapStateToProps<TodoListStateProps, TodoListOwnProps> = (state: StoreType, props) => {
   return {
@@ -24,7 +25,7 @@ const mapStateToProps: MapStateToProps<TodoListStateProps, TodoListOwnProps> = (
 
 const mapDispatchToProps: MapDispatchToPropsFunction<TodoListDispatchProps, TodoListOwnProps> = (dispatch: Dispatch<any>, props) => {
   return {
-    onTodoClick: (id) => dispatch(toggleTodo(id))
+    onTodoClick: (id) => dispatch(use(todoActions.toggleTodo)(id))
   };
 };
 
