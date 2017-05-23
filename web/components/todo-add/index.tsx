@@ -1,29 +1,33 @@
 import * as React from 'react';
 import { Field } from 'redux-form';
-import { HelperFunction } from 'react-bem-helper';
+import { block, element } from '@redneckz/react-bem-helper';
 
 import { TodoAddProps, TodoAddPropTypes } from '../../props/todoAdd';
 import { TodoAddText } from '../todo-add-text';
-import { bem } from '../../../tools/bem';
+
 
 import './style.scss';
 
-const classes: HelperFunction<string> = bem('todo-add');
+const Form: any = element('form')('form');
+const AddButton: any = element('add-button')('button');
 
-export class TodoAdd extends React.Component<TodoAddProps, void> {
+//const classes: HelperFunction<string> = bem('todo-add');
+@block('todo-add')
+export class TodoAdd extends React.PureComponent<TodoAddProps, void> {
     static propTypes?: any = TodoAddPropTypes;
+
     constructor(props: TodoAddProps, context: any) {
       super(props, context);
     }
-
+    
     render(): JSX.Element | null {
-      return <div className={classes()}>
-        <form onSubmit={this.props.handleSubmit} className={classes('form')}> 
+      return <div className={this.props.className}>
+        <Form onSubmit={this.props.handleSubmit}> 
           <Field name='text' component={TodoAddText}/>
-          <button type='submit' className={classes('add-button')} >
+          <AddButton type='submit'  >
             Add Todo
-          </button>
-        </form>
+          </AddButton>
+        </Form>
       </div>;
   }
 }

@@ -2,8 +2,10 @@ import * as React from 'react';
 import { PropTypes, Validator } from 'prop-types';
 import { Map } from 'immutable';
 
+import { BemProps } from '../../tools/react/bem';
 
-export interface TodoOwnProps extends React.Props<any> {
+
+export interface TodoOwnProps extends React.Props<any>, BemProps {
     id: string;
     text: string;
     completed: Boolean;

@@ -14,6 +14,16 @@ import { initialTodoStore } from './store/initial';
 import { TodoListReducer } from './reducers/todoReducer';
 import { watchAndLog, watchSubmit } from './sagas/todoSaga';
 
+// TODO: segregate bem setting
+import { PureComponent } from 'react';
+import {Config} from '@redneckz/react-bem-helper';
+
+Config.ELEMENT_SEPARATOR = '__';
+Config.MODIFIER_SEPARATOR = '_';
+Config.ASSERTION_ENABLED = process.env.NODE_ENV === 'development';
+Config.COMPONENT_BASE_CLASS = PureComponent;
+
+
 const rootReducer: Reducer<StoreType> = combineReducers<StoreType>({
    form: formReducer,
    todo: createReducer(TodoListReducer, initialTodoStore)

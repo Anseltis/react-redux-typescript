@@ -3,6 +3,8 @@ import { PropTypes, Validator } from 'prop-types';
 import { Map } from 'immutable';
 import {  FormProps, DataShape, Config, FormErrors } from 'redux-form';
 
+import { BemProps } from '../../tools/react/bem';
+
 export interface TodoAddFormData extends DataShape {
     text: string;
 }
@@ -21,7 +23,7 @@ export interface TodoAddOwnProps extends TodoAddNativeProps, FormProps<TodoAddFo
 export interface TodoAddDispatchProps extends React.Props<any>, FormProps<TodoAddFormData, TodoAddProps, void> {
 }
 
-export type TodoAddProps = TodoAddOwnProps & TodoAddStateProps & TodoAddDispatchProps;
+export type TodoAddProps = TodoAddOwnProps & TodoAddStateProps & TodoAddDispatchProps & BemProps;
 
 export function todoAddValidate(values: TodoAddFormData, props: TodoAddOwnProps): FormErrors<TodoAddFormData> {
     const errors: FormErrors<TodoAddFormData> = { text: undefined };

@@ -1,19 +1,20 @@
 import * as React from 'react';
-import { HelperFunction } from 'react-bem-helper';
+import { block } from '@redneckz/react-bem-helper';
 
 import { TodoProps, TodoPropTypes } from '../../props/todo';
-import { bem } from '../../../tools/bem';
-
 import './style.scss';
 
-const classes: HelperFunction<string> = bem('todo-item');
+@block('todo-item', props => ({completed: props.completed}))
+export class Todo extends React.PureComponent<TodoProps, void> {
+    static propTypes?: any = TodoPropTypes;
+    constructor(props: TodoProps, context: any) {
+      super(props, context);
+    }
 
-export const Todo: React.StatelessComponent<TodoProps>  = (props) => {
-  return <li
-      className={classes(null, props.completed && 'completed')}
-      onClick={props.onClick}>
-      {props.text}      
-    </li>;
+    render(): JSX.Element | null {
+      return <li      
+        onClick={this.props.onClick} className={this.props.className}>
+          {this.props.text}      
+        </li>;
+    }
 };
-
-Todo.propTypes = TodoPropTypes;
