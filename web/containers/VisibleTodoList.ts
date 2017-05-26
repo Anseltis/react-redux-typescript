@@ -17,7 +17,8 @@ const mapStateToProps: MapStateToProps<TodoListStateProps, TodoListOwnProps> = (
       return {
         id: todo.id,
         text: todo.text,
-        completed: todo.completed
+        completed: todo.completed,
+        className: ''
       };
     })
   };

@@ -7,22 +7,13 @@ import { reducer as formReducer } from 'redux-form';
 import { createReducer } from '../tools/react/reducer';
 import { devtool } from '../tools/react/devtool';
 import { hotReplace } from '../tools/react/hotReplace';
+import { configureBEM } from '../tools/bemConfig';
 
 import { StoreType } from './store/store';
 import { initialTodoStore } from './store/initial';
 
 import { TodoListReducer } from './reducers/todoReducer';
 import { watchAndLog, watchSubmit } from './sagas/todoSaga';
-
-// TODO: segregate bem setting
-import { PureComponent } from 'react';
-import {Config} from '@redneckz/react-bem-helper';
-
-Config.ELEMENT_SEPARATOR = '__';
-Config.MODIFIER_SEPARATOR = '_';
-Config.ASSERTION_ENABLED = process.env.NODE_ENV === 'development';
-Config.COMPONENT_BASE_CLASS = PureComponent;
-
 
 const rootReducer: Reducer<StoreType> = combineReducers<StoreType>({
    form: formReducer,
@@ -37,6 +28,9 @@ function* rootSaga(): SagaIterator  {
 }
 
 export function configureStore(): Store<StoreType> {
+
+  configureBEM();
+
   const sagaMiddleware: SagaMiddleware = sagaMiddlewareFactory();
   const store: Store<StoreType> = createStore<StoreType>(
     rootReducer,

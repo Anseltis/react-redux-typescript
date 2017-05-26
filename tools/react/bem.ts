@@ -1,3 +1,3 @@
 export interface BemProps {
-    className?: string;
+    className: string;
 }

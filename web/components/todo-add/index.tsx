@@ -5,7 +5,6 @@ import { block, element } from '@redneckz/react-bem-helper';
 import { TodoAddProps, TodoAddPropTypes } from '../../props/todoAdd';
 import { TodoAddText } from '../todo-add-text';
 
-
 import './style.scss';
 
 const Form: any = element('form')('form');
